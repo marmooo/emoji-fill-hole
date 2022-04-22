@@ -86,10 +86,14 @@
     </header>
     <main class="container">
       <noscript>
-        <div class="alert alert-warning">Please turn on Javascript.</div>
+        <div class="alert alert-warning">JavaScript を ON にしてください</div>
       </noscript>
       <div id="noTTS" class="alert alert-warning text-center d-none">
-        Your browser does not support text-to-speech, please use Chrome / Safari.
+        <p>お使いのブラウザは音声読み上げに対応していません。
+        Firefox for Linux は発話モジュールをインストールしてください。例:
+        </p>
+        <pre><code>sudo apt install speech-dispatcher
+sudo apt install festival speech-dispatcher-festival</code></pre>
       </div>
       <div id="gameStart" class="text-center d-none">
         <div id="countdown">
@@ -98,12 +102,12 @@
         </div>
       </div>
       <div id="scorePanel" class="text-center pb-3 d-none">
-        <h3 class="pt-3">Score</h3>
+        <h3 class="pt-3">スコア</h3>
         <span id="score-emoji" class="emoji pt-3">🍙</span>
-        <p>You have solved ...</p>
+        <p>正しく書けたのは…</p>
         <div class="h2 pb-3">
           <span id="score" class="h1">0</span>
-          emoji!
+          絵文字!
         </div>
         <button id="restartButton" type="button" class="btn btn-primary btn-lg m-1">RESTART</button>
       </div>
