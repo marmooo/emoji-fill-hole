@@ -1,4 +1,4 @@
-var CACHE_NAME = '2022-03-11 10:30';
+var CACHE_NAME = '2022-04-23 13:15';
 var urlsToCache = [
   "/tegaki-abc/",
   "/tegaki-abc/index.js",
@@ -18,7 +18,7 @@ var urlsToCache = [
   "/tegaki-abc/mp3/cat.mp3",
   "/tegaki-abc/mp3/correct3.mp3",
   "/tegaki-abc/favicon/original.svg",
-  "https://cdn.jsdelivr.net/npm/signature_pad@4.0.2/dist/signature_pad.umd.min.js",
+  "https://cdn.jsdelivr.net/npm/signature_pad@4.0.4/dist/signature_pad.umd.min.js",
   "https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.16.0/dist/tf.min.js",
   "https://fonts.googleapis.com/css?family=Source+Code+Pro",
 ];
