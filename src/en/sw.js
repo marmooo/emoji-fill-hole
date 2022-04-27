@@ -2,6 +2,10 @@ var CACHE_NAME = "2022-04-28 08:45";
 var urlsToCache = [
   "/emoji-fill-hole/",
   "/emoji-fill-hole/index.js",
+  "/emoji-fill-hole/en/",
+  "/emoji-fill-hole/en/worker.js",
+  "/emoji-fill-hole/en/model/model.json",
+  "/emoji-fill-hole/en/model/group1-shard1of1.bin",
   "/emoji-fill-hole/kohacu.webp",
   "/emoji-fill-hole/eraser.svg",
   "/emoji-fill-hole/refresh.svg",
