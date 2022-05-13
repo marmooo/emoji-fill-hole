@@ -159,7 +159,7 @@ function showAnswer() {
   const m = ctx.measureText(holeString);
   const x = (canvas.width - m.width) / 2;
   const y = (canvas.height + m.actualBoundingBoxAscent) / 2;
-  ctx.fillText(answer, x, y);
+  ctx.fillText(holeString, x, y);
 }
 
 function respeak() {
