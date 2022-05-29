@@ -5,6 +5,7 @@ const audioContext = new AudioContext();
 const problems = {};
 const canvasCache = document.createElement("canvas").getContext("2d");
 const lang = document.documentElement.lang;
+const ttsLang = getTTSLang();
 const answers = { en:"sushi", ja:"すし" };
 const holeStrings = { en:"s", ja:"し"};
 const hole = "🕳️";
@@ -28,7 +29,7 @@ function changeLang() {
 }
 
 function getTTSLang() {
-  switch (document.documentElement.lang) {
+  switch (lang) {
     case "en":
       return "en-US";
     case "ja":
@@ -115,7 +116,7 @@ function loadVoices() {
     }
   });
   allVoicesObtained.then((voices) => {
-    englishVoices = voices.filter((voice) => voice.lang == "en-US");
+    englishVoices = voices.filter((voice) => voice.lang == ttsLang);
   });
 }
 loadVoices();
@@ -124,7 +125,7 @@ function speak(text) {
   speechSynthesis.cancel();
   const msg = new SpeechSynthesisUtterance(text);
   msg.voice = englishVoices[Math.floor(Math.random() * englishVoices.length)];
-  msg.lang = "en-US";
+  msg.lang = ttsLang;
   speechSynthesis.speak(msg);
   return msg;
 }
