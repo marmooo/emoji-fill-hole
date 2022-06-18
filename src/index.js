@@ -1,19 +1,28 @@
-let endAudio, errorAudio, correctAudio;
-loadAudios();
-const AudioContext = window.AudioContext || window.webkitAudioContext;
-const audioContext = new AudioContext();
+const countPanel = document.getElementById("countPanel");
+const infoPanel = document.getElementById("infoPanel");
+const playPanel = document.getElementById("playPanel");
+const scorePanel = document.getElementById("scorePanel");
+const gameTime = 60;
+const categories = [...document.getElementById("courseOption").options].map(
+  (x) => x.value.toLowerCase(),
+);
 const problems = {};
 const canvasCache = document.createElement("canvas").getContext("2d");
-const lang = document.documentElement.lang;
+const originalLang = document.documentElement.lang;
 const ttsLang = getTTSLang();
 const answers = { en:"sushi", ja:"すし" };
 const holeStrings = { en:"s", ja:"し"};
 const hole = "🕳️";
-let answer = answers[lang];
-let holeString = holeStrings[lang];
+let answer = answers[originalLang];
+let holeString = holeStrings[originalLang];
 let hinted = false;
 let correctCount = 0;
 let englishVoices = [];
+loadVoices();
+let endAudio, errorAudio, correctAudio;
+loadAudios();
+const AudioContext = window.AudioContext || window.webkitAudioContext;
+const audioContext = new AudioContext();
 loadConfig();
 
 function loadConfig() {
@@ -29,7 +38,7 @@ function changeLang() {
 }
 
 function getTTSLang() {
-  switch (lang) {
+  switch (originalLang) {
     case "en":
       return "en-US";
     case "ja":
@@ -97,13 +106,13 @@ function loadAudios() {
 
 function loadVoices() {
   // https://stackoverflow.com/questions/21513706/
-  const allVoicesObtained = new Promise(function (resolve) {
+  const allVoicesObtained = new Promise((resolve) => {
     let voices = speechSynthesis.getVoices();
     if (voices.length !== 0) {
       resolve(voices);
     } else {
       let supported = false;
-      speechSynthesis.addEventListener("voiceschanged", function () {
+      speechSynthesis.addEventListener("voiceschanged", () => {
         supported = true;
         voices = speechSynthesis.getVoices();
         resolve(voices);
@@ -119,7 +128,6 @@ function loadVoices() {
     englishVoices = voices.filter((voice) => voice.lang == ttsLang);
   });
 }
-loadVoices();
 
 function speak(text) {
   speechSynthesis.cancel();
@@ -181,7 +189,7 @@ function digHoles(text) {
 function nextProblem() {
   hideAnswer();
   const course = document.getElementById("courseOption");
-  const category = course.options[course.selectedIndex].value.toLowerCase();
+  const category = categories[course.selectedIndex];
   const choices = problems[category].slice();
   shuffle(choices);
   const [emojis, text] = choices[getRandomInt(0, choices.length)];
@@ -247,12 +255,12 @@ function catWalk(freq, emoji, text) {
   const size = 128;
   canvas.style.top = getRandomInt(0, height - size) + "px";
   canvas.style.left = width - size + "px";
-  canvas.addEventListener("click", function () {
+  canvas.addEventListener("click", () => {
     speak(text);
-    this.remove();
+    canvas.remove();
   }, { once: true });
   area.appendChild(canvas);
-  const timer = setInterval(function () {
+  const timer = setInterval(() => {
     const x = parseInt(canvas.style.left) - 1;
     if (x > -size) {
       canvas.style.left = x + "px";
@@ -264,7 +272,7 @@ function catWalk(freq, emoji, text) {
 }
 
 function catsWalk() {
-  setInterval(function () {
+  setInterval(() => {
     if (Math.random() > 0.995) {
       const [emoji, text] = selectRandomEmoji();
       catWalk(getRandomInt(5, 20), emoji, text);
@@ -276,12 +284,11 @@ let gameTimer;
 function startGameTimer() {
   clearInterval(gameTimer);
   const timeNode = document.getElementById("time");
-  timeNode.textContent = "60秒 / 60秒";
-  gameTimer = setInterval(function () {
-    const arr = timeNode.textContent.split("秒 /");
-    const t = parseInt(arr[0]);
+  initTime();
+  gameTimer = setInterval(() => {
+    const t = parseInt(timeNode.textContent);
     if (t > 0) {
-      timeNode.textContent = (t - 1) + "秒 /" + arr[1];
+      timeNode.textContent = t - 1;
     } else {
       clearInterval(gameTimer);
       playAudio(endAudio);
@@ -290,8 +297,11 @@ function startGameTimer() {
   }, 1000);
 }
 
+function initTime() {
+  document.getElementById("time").textContent = gameTime;
+}
+
 function selectRandomEmoji() {
-  const categories = Object.keys(problems);
   const category = categories[getRandomInt(0, categories.length)];
   const p = problems[category];
   const problem = p[getRandomInt(0, p.length)];
@@ -310,12 +320,12 @@ let countdownTimer;
 function countdown() {
   clearTimeout(countdownTimer);
   changeUIEmoji();
-  gameStart.classList.remove("d-none");
+  countPanel.classList.remove("d-none");
   playPanel.classList.add("d-none");
   scorePanel.classList.add("d-none");
   const counter = document.getElementById("counter");
   counter.textContent = 3;
-  countdownTimer = setInterval(function () {
+  countdownTimer = setInterval(() => {
     const colors = ["skyblue", "greenyellow", "violet", "tomato"];
     if (parseInt(counter.textContent) > 1) {
       const t = parseInt(counter.textContent) - 1;
@@ -323,7 +333,7 @@ function countdown() {
       counter.textContent = t;
     } else {
       clearTimeout(countdownTimer);
-      gameStart.classList.add("d-none");
+      countPanel.classList.add("d-none");
       playPanel.classList.remove("d-none");
       document.getElementById("score").textContent = 0;
       correctCount = 0;
@@ -340,7 +350,7 @@ function scoring() {
 }
 
 function initProblems() {
-  fetch(`/emoji-fill-hole/data/${lang}.csv`)
+  fetch(`/emoji-fill-hole/data/${originalLang}.csv`)
     .then((response) => response.text())
     .then((tsv) => {
       let prevEn;
@@ -350,8 +360,8 @@ function initProblems() {
           problems[category] = [];
         }
         if (prevEn == en) {
-          const categories = problems[category];
-          const last = categories[categories.length - 1];
+          const p = problems[category];
+          const last = p[p.length - 1];
           last[0].push(emoji);
         } else {
           problems[category].push([[emoji], en]);
@@ -369,8 +379,8 @@ document.getElementById("eraser").onclick = () => {
   pad.clear();
 };
 
-const worker = new Worker(`/emoji-fill-hole/${lang}/worker.js`);
-worker.addEventListener("message", function (e) {
+const worker = new Worker(`/emoji-fill-hole/${originalLang}/worker.js`);
+worker.addEventListener("message", (e) => {
   const alphabet = e.data.result[0];
   const problem = document.getElementById("problem").textContent;
   const regexp = new RegExp(hole, "g");

@@ -1,4 +1,4 @@
-var CACHE_NAME = "2022-05-29 12:35";
+var CACHE_NAME = "2022-06-18 18:00";
 var urlsToCache = [
   "/emoji-fill-hole/",
   "/emoji-fill-hole/index.js",
@@ -9,9 +9,7 @@ var urlsToCache = [
   "/emoji-fill-hole/kohacu.webp",
   "/emoji-fill-hole/eraser.svg",
   "/emoji-fill-hole/refresh.svg",
-  "/emoji-fill-hole/mp3/incorrect1.mp3",
   "/emoji-fill-hole/mp3/end.mp3",
-  "/emoji-fill-hole/mp3/cat.mp3",
   "/emoji-fill-hole/mp3/correct3.mp3",
   "/emoji-fill-hole/favicon/favicon.svg",
   "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css",

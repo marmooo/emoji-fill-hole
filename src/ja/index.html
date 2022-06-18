@@ -14,7 +14,7 @@
     <meta property="og:url" content="https://marmooo.github.io/emoji-fill-hole/">
     <meta property="og:image" content="https://marmooo.github.io/emoji-fill-hole/favicon/apple-touch-icon.png">
     <meta name="twitter:card" content="summary">
-    <!-- Global site tag (gtag.js) - Google Analytics -->
+    
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-142997649-1"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -98,43 +98,29 @@
         <pre><code>sudo apt install speech-dispatcher
 sudo apt install festival speech-dispatcher-festival</code></pre>
       </div>
-      <div id="gameStart" class="text-center d-none">
-        <div id="countdown">
-          <div id="counter">3</div>
-          <span id="counter-emoji" class="emoji pt-3">🍢</span>
-        </div>
-      </div>
-      <div id="scorePanel" class="text-center pb-3 d-none">
-        <h3 class="pt-3">スコア</h3>
-        <span id="score-emoji" class="emoji pt-3">🍙</span>
-        <p>正しく書けたのは…</p>
-        <div class="h2 pb-3">
-          <span id="score" class="h1">0</span>
-          絵文字!
-        </div>
-        <button id="restartButton" type="button" class="btn btn-primary btn-lg m-1">RESTART</button>
-      </div>
       <div id="playPanel">
         <div class="row">
-          <div class="col-sm">
+          <div class="col-md">
             <p>ゲームで日本語の勉強！絵文字に対応するアルファベットを穴埋めしよう！
             </p>
           </div>
-          <div class="col-sm">
-            <div class="alert alert-info text-center">
-              <div class="h5">
-                <label>time:</label>
-                <span id="time" class="ms-1">60 / 60sec</span>
+          <div id="timePanel" class="col-md text-center">
+            <div class="alert alert-info">
+              <div class="d-flex flex-wrap justify-content-center">
+                <div class="h5 text-nowrap notranslate">
+                  <span id="time">60</span>
+                  <span> / 60 sec</span>
+                </div>
               </div>
-              <div>
-                <button id="startButton" class="btn btn-primary btn-lg m-1">スタート</button>
-                <button id="showAnswer" class="btn btn-secondary btn-lg m-1">こたえ</button>
+              <div class="mt-2">
+                <button id="startButton" class="btn btn-primary btn-lg m-1">START</button>
+                <button id="showAnswer" class="btn btn-secondary btn-lg m-1">ANSWER</button>
               </div>
             </div>
           </div>
         </div>
         <div class="text-center">
-          <div class="d-flex justify-content-center">
+          <div class="d-flex justify-content-center notranslate">
             <span id="emoji">🍣</span>
             <div class="align-self-center">
               <table class="table m-auto w-auto h3 mb-3">
@@ -159,6 +145,21 @@ sudo apt install festival speech-dispatcher-festival</code></pre>
           </div>
         </div>
         <div id="catsWalk" class="pt-4 text-center"></div>
+      </div>
+      <div id="countPanel" class="text-center d-none notranslate">
+        <div id="countdown">
+          <div id="counter">3</div>
+          <span id="counter-emoji" class="emoji pt-3">🍢</span>
+        </div>
+      </div>
+      <div id="scorePanel" class="text-center pb-3 d-none">
+        <h3 class="pt-3">スコア</h3>
+        <span id="score-emoji" class="emoji pt-3 notranslate">🍙</span>
+        <p>正しく書けたのは…</p>
+        <div class="h2 pb-3">
+          <span id="score" class="h1 notranslate">0</span>
+        </div>
+        <button id="restartButton" type="button" class="btn btn-primary btn-lg m-1">RESTART</button>
       </div>
     </main>
     <footer class="pt-4 alert text-center">
