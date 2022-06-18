@@ -29,6 +29,13 @@ function loadConfig() {
   if (localStorage.getItem("darkMode") == 1) {
     document.documentElement.dataset.theme = "dark";
   }
+  if (originalLang == "ja") {
+    if (localStorage.getItem("furigana") == 1) {
+      const obj = document.getElementById("addFurigana");
+      addFurigana(obj);
+      obj.setAttribute("data-done", true);
+    }
+  }
 }
 
 function changeLang() {
@@ -53,6 +60,21 @@ function toggleDarkMode() {
   } else {
     localStorage.setItem("darkMode", 1);
     document.documentElement.dataset.theme = "dark";
+  }
+}
+
+function addFurigana() {
+  if (originalLang != "ja") return;
+  const obj = document.getElementById("addFurigana");
+  if (obj.getAttribute("data-done")) {
+    localStorage.setItem("furigana", 0);
+    location.reload();
+  } else {
+    import("https://marmooo.github.io/yomico/yomico.min.js").then((module) => {
+      module.yomico("/emoji-fill-hole/ja/index.yomi");
+    });
+    localStorage.setItem("furigana", 1);
+    obj.setAttribute("data-done", true);
   }
 }
 
@@ -397,6 +419,8 @@ worker.addEventListener("message", (e) => {
 });
 
 document.getElementById("toggleDarkMode").onclick = toggleDarkMode;
+const furiganaButton = document.getElementById("addFurigana");
+if (furiganaButton) furiganaButton.onclick = addFurigana;
 document.getElementById("restartButton").onclick = countdown;
 document.getElementById("startButton").onclick = countdown;
 document.getElementById("showAnswer").onclick = showAnswer;
