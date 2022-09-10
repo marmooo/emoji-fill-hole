@@ -1,4 +1,4 @@
-var CACHE_NAME = "2022-08-31 08:35";
+var CACHE_NAME = "2022-09-11 08:49";
 var urlsToCache = [
   "/emoji-fill-hole/",
   "/emoji-fill-hole/index.js",
@@ -14,7 +14,7 @@ var urlsToCache = [
   "/emoji-fill-hole/mp3/correct3.mp3",
   "/emoji-fill-hole/favicon/favicon.svg",
   "https://marmooo.github.io/yomico/yomico.min.js",
-  "https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css",
+  "https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css",
   "https://cdn.jsdelivr.net/npm/signature_pad@4.0.7/dist/signature_pad.umd.min.js",
   "https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.20.0/dist/tf.min.js",
   "https://fonts.googleapis.com/css?family=Source+Code+Pro",
