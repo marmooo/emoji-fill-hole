@@ -269,6 +269,7 @@ function catWalk(freq, emoji, text) {
   const width = area.offsetWidth;
   const height = area.offsetHeight;
   const canvas = document.createElement("span");
+  canvas.setAttribute("role", "button");
   canvas.className = "emoji walker";
   canvas.style.position = "absolute";
   canvas.textContent = emoji;
