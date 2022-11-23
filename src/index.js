@@ -200,7 +200,7 @@ function digHoles(text) {
   do {
     const pos = getRandomInt(0, text.length);
     holeStr = text[pos];
-  } while (holeStr == " ");
+  } while (holeStr == " " || holeStr == " ");
   const regexp = new RegExp(holeStr, "g");
   const holedText = text.replace(regexp, hole);
   return [holedText, holeStr];
