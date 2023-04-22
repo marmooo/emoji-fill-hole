@@ -7,7 +7,8 @@ const categories = [...document.getElementById("courseOption").options].map(
   (x) => x.value.toLowerCase(),
 );
 const problems = {};
-const canvasCache = document.createElement("canvas").getContext("2d");
+const canvasCache = document.createElement("canvas")
+  .getContext("2d", { willReadFrequently: true });
 const originalLang = document.documentElement.lang;
 const ttsLang = getTTSLang();
 const answers = { en: "sushi", ja: "すし" };
