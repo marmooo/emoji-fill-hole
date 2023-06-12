@@ -324,6 +324,7 @@ function countdown() {
   clearTimeout(countdownTimer);
   changeUIEmoji();
   countPanel.classList.remove("d-none");
+  infoPanel.classList.add("d-none");
   playPanel.classList.add("d-none");
   scorePanel.classList.add("d-none");
   const counter = document.getElementById("counter");
@@ -337,6 +338,7 @@ function countdown() {
     } else {
       clearTimeout(countdownTimer);
       countPanel.classList.add("d-none");
+      infoPanel.classList.remove("d-none");
       playPanel.classList.remove("d-none");
       document.getElementById("score").textContent = 0;
       correctCount = 0;
