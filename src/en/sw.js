@@ -1,4 +1,4 @@
-var CACHE_NAME = "2023-05-21 14:10";
+var CACHE_NAME = "2023-06-12 10:15";
 var urlsToCache = [
   "/emoji-fill-hole/",
   "/emoji-fill-hole/index.js",
@@ -12,7 +12,6 @@ var urlsToCache = [
   "/emoji-fill-hole/mp3/end.mp3",
   "/emoji-fill-hole/mp3/correct3.mp3",
   "/emoji-fill-hole/favicon/favicon.svg",
-  "https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css",
   "https://cdn.jsdelivr.net/npm/signature_pad@4.1.5/dist/signature_pad.umd.min.js",
   "https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.6.0/dist/tf.min.js",
   "https://fonts.googleapis.com/css?family=Source+Code+Pro",
