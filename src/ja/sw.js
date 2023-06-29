@@ -1,4 +1,4 @@
-var CACHE_NAME = "2023-06-24 10:16";
+var CACHE_NAME = "2023-06-30 00:00";
 var urlsToCache = [
   "/emoji-fill-hole/",
   "/emoji-fill-hole/index.js",
@@ -8,8 +8,6 @@ var urlsToCache = [
   "/emoji-fill-hole/ja/model/model.json",
   "/emoji-fill-hole/ja/model/group1-shard1of1.bin",
   "/emoji-fill-hole/kohacu.webp",
-  "/emoji-fill-hole/eraser.svg",
-  "/emoji-fill-hole/refresh.svg",
   "/emoji-fill-hole/mp3/end.mp3",
   "/emoji-fill-hole/mp3/correct3.mp3",
   "/emoji-fill-hole/favicon/favicon.svg",
