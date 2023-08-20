@@ -9,13 +9,13 @@ const categories = [...document.getElementById("courseOption").options].map(
 const problems = {};
 const canvasCache = document.createElement("canvas")
   .getContext("2d", { willReadFrequently: true });
-const originalLang = document.documentElement.lang;
+const htmlLang = document.documentElement.lang;
 const ttsLang = getTTSLang();
 const answers = { en: "sushi", ja: "すし" };
 const holeStrings = { en: "s", ja: "し" };
 const hole = "🕳️";
-let answer = answers[originalLang];
-let holeString = holeStrings[originalLang];
+let answer = answers[htmlLang];
+let holeString = holeStrings[htmlLang];
 let hinted = false;
 let correctCount = 0;
 let englishVoices = [];
@@ -30,7 +30,7 @@ function loadConfig() {
   if (localStorage.getItem("darkMode") == 1) {
     document.documentElement.setAttribute("data-bs-theme", "dark");
   }
-  if (originalLang == "ja") {
+  if (htmlLang == "ja") {
     if (localStorage.getItem("furigana") == 1) {
       const obj = document.getElementById("addFurigana");
       addFurigana(obj);
@@ -56,7 +56,7 @@ function changeLang() {
 }
 
 function getTTSLang() {
-  switch (originalLang) {
+  switch (htmlLang) {
     case "en":
       return "en-US";
     case "ja":
@@ -65,7 +65,7 @@ function getTTSLang() {
 }
 
 function addFurigana() {
-  if (originalLang != "ja") return;
+  if (htmlLang != "ja") return;
   const obj = document.getElementById("addFurigana");
   if (obj.getAttribute("data-done")) {
     localStorage.setItem("furigana", 0);
@@ -355,7 +355,7 @@ function scoring() {
 }
 
 function initProblems() {
-  fetch(`/emoji-fill-hole/data/${originalLang}.csv`)
+  fetch(`/emoji-fill-hole/data/${htmlLang}.csv`)
     .then((response) => response.text())
     .then((tsv) => {
       let prevEn;
@@ -384,7 +384,7 @@ document.getElementById("eraser").onclick = () => {
   pad.clear();
 };
 
-const worker = new Worker(`/emoji-fill-hole/${originalLang}/worker.js`);
+const worker = new Worker(`/emoji-fill-hole/${htmlLang}/worker.js`);
 worker.addEventListener("message", (e) => {
   const alphabet = e.data.result[0];
   const problem = document.getElementById("problem").textContent;
