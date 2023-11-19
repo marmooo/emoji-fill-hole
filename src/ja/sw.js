@@ -13,7 +13,7 @@ const urlsToCache = [
   "/emoji-fill-hole/favicon/favicon.svg",
   "https://marmooo.github.io/yomico/yomico.min.js",
   "https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js",
-  "https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.12.0/dist/tf.min.js",
+  "https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.13.0/dist/tf.min.js",
   "https://fonts.googleapis.com/css?family=Source+Code+Pro",
 ];
 
