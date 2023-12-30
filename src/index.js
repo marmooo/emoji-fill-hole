@@ -396,7 +396,7 @@ worker.addEventListener("message", (e) => {
       correctCount += 1;
     }
     hinted = false;
-    playAudio("correct");
+    playAudio("correct", 0.3);
     nextProblem();
   }
 });
