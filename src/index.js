@@ -1,3 +1,5 @@
+import signaturePad from "https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/+esm";
+
 const countPanel = document.getElementById("countPanel");
 const infoPanel = document.getElementById("infoPanel");
 const playPanel = document.getElementById("playPanel");
@@ -209,7 +211,7 @@ function nextProblem() {
 }
 
 function initSignaturePad(canvas) {
-  const pad = new SignaturePad(canvas, {
+  const pad = new signaturePad(canvas, {
     minWidth: 8,
     maxWidth: 8,
     penColor: "black",
