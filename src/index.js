@@ -16,6 +16,7 @@ const ttsLang = getTTSLang();
 const answers = { en: "sushi", ja: "すし" };
 const holeStrings = { en: "s", ja: "し" };
 const hole = "🕳️";
+let firstRun = true;
 let answer = answers[htmlLang];
 let holeString = holeStrings[htmlLang];
 let hinted = false;
@@ -324,8 +325,9 @@ function changeUIEmoji() {
 
 let countdownTimer;
 function countdown() {
-  clearTimeout(countdownTimer);
+  if (firstRun) predict(pad.canvas);
   changeUIEmoji();
+  clearTimeout(countdownTimer);
   countPanel.classList.remove("d-none");
   infoPanel.classList.add("d-none");
   playPanel.classList.add("d-none");
@@ -388,19 +390,21 @@ document.getElementById("eraser").onclick = () => {
 };
 
 const worker = new Worker(`/emoji-fill-hole/${htmlLang}/worker.js`);
-worker.addEventListener("message", (e) => {
-  const alphabet = e.data.result[0];
-  const problem = document.getElementById("problem").textContent;
-  const regexp = new RegExp(hole, "g");
-  const reply = problem.replace(regexp, alphabet);
-  document.getElementById("reply").textContent = reply;
-  if (reply == answer) {
-    if (!hinted) {
-      correctCount += 1;
+worker.addEventListener("message", (event) => {
+  if (firstRun) {
+    firstRun = false;
+  } else {
+    const alphabet = event.data.result[0];
+    const problem = document.getElementById("problem").textContent;
+    const regexp = new RegExp(hole, "g");
+    const reply = problem.replace(regexp, alphabet);
+    document.getElementById("reply").textContent = reply;
+    if (reply == answer) {
+      if (!hinted) correctCount += 1;
+      hinted = false;
+      playAudio("correct", 0.3);
+      nextProblem();
     }
-    hinted = false;
-    playAudio("correct", 0.3);
-    nextProblem();
   }
 });
 
