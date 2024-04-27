@@ -16,7 +16,6 @@ const ttsLang = getTTSLang();
 const answers = { en: "sushi", ja: "すし" };
 const holeStrings = { en: "s", ja: "し" };
 const hole = "🕳️";
-let firstRun = true;
 let answer = answers[htmlLang];
 let holeString = holeStrings[htmlLang];
 let hinted = false;
@@ -247,7 +246,7 @@ function getImageData(drawElement) {
 
 function predict(canvas) {
   const imageData = getImageData(canvas);
-  worker.postMessage({ imageData: imageData });
+  worker.postMessage({ imageData });
 }
 
 function catWalk(freq, emoji, text) {
@@ -325,7 +324,6 @@ function changeUIEmoji() {
 
 let countdownTimer;
 function countdown() {
-  if (firstRun) predict(pad.canvas);
   changeUIEmoji();
   clearTimeout(countdownTimer);
   countPanel.classList.remove("d-none");
@@ -391,20 +389,17 @@ document.getElementById("eraser").onclick = () => {
 
 const worker = new Worker(`/emoji-fill-hole/${htmlLang}/worker.js`);
 worker.addEventListener("message", (event) => {
-  if (firstRun) {
-    firstRun = false;
-  } else {
-    const alphabet = event.data.result[0];
-    const problem = document.getElementById("problem").textContent;
-    const regexp = new RegExp(hole, "g");
-    const reply = problem.replace(regexp, alphabet);
-    document.getElementById("reply").textContent = reply;
-    if (reply == answer) {
-      if (!hinted) correctCount += 1;
-      hinted = false;
-      playAudio("correct", 0.3);
-      nextProblem();
-    }
+  if (pad.toData().length == 0) return;
+  const alphabet = event.data.result[0];
+  const problem = document.getElementById("problem").textContent;
+  const regexp = new RegExp(hole, "g");
+  const reply = problem.replace(regexp, alphabet);
+  document.getElementById("reply").textContent = reply;
+  if (reply == answer) {
+    if (!hinted) correctCount += 1;
+    hinted = false;
+    playAudio("correct", 0.3);
+    nextProblem();
   }
 });
 
@@ -416,6 +411,9 @@ document.getElementById("startButton").onclick = countdown;
 document.getElementById("showAnswer").onclick = showAnswer;
 document.getElementById("respeak").onclick = respeak;
 document.getElementById("lang").onchange = changeLang;
+document.addEventListener("pointerdown", () => {
+  predict(pad.canvas);
+}, { once: true });
 document.addEventListener("click", unlockAudio, {
   once: true,
   useCapture: true,
