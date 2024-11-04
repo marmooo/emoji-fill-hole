@@ -1,4 +1,4 @@
-const CACHE_NAME = "2024-10-30 00:43";
+const CACHE_NAME = "2024-11-04 13:29";
 const urlsToCache = [
   "/emoji-fill-hole/",
   "/emoji-fill-hole/index.js",
@@ -10,7 +10,7 @@ const urlsToCache = [
   "/emoji-fill-hole/mp3/end.mp3",
   "/emoji-fill-hole/mp3/correct3.mp3",
   "/emoji-fill-hole/favicon/favicon.svg",
-  "https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.21.0/dist/tf.min.js",
+  "https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js",
   "https://fonts.googleapis.com/css?family=Source+Code+Pro",
 ];
 
