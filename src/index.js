@@ -12,7 +12,7 @@ const problems = {};
 const canvasCache = document.createElement("canvas")
   .getContext("2d", { willReadFrequently: true });
 const htmlLang = document.documentElement.lang;
-const ttsLang = getTTSLang();
+const ttsLang = getTTSLang(htmlLang);
 const answers = { en: "sushi", ja: "すし" };
 const holeStrings = { en: "s", ja: "し" };
 const hole = "🕳️";
@@ -55,7 +55,7 @@ function changeLang() {
   location.href = `/emoji-fill-hole/${lang}/`;
 }
 
-function getTTSLang() {
+function getTTSLang(htmlLang) {
   switch (htmlLang) {
     case "en":
       return "en-US";
@@ -89,6 +89,10 @@ function createAudioContext() {
 }
 
 function unlockAudio() {
+  const uttr = new SpeechSynthesisUtterance("");
+  uttr.lang = ttsLang;
+  speechSynthesis.speak(uttr);
+
   if (audioContext) {
     audioContext.resume();
   } else {
@@ -96,7 +100,7 @@ function unlockAudio() {
     loadAudio("end", "/emoji-fill-hole/mp3/end.mp3");
     loadAudio("correct", "/emoji-fill-hole/mp3/correct3.mp3");
   }
-  document.removeEventListener("pointerdown", unlockAudio);
+  document.removeEventListener("click", unlockAudio);
   document.removeEventListener("keydown", unlockAudio);
 }
 
@@ -435,5 +439,5 @@ document.getElementById("lang").onchange = changeLang;
 document.addEventListener("pointerdown", () => {
   predict(pad.canvas);
 }, { once: true });
-document.addEventListener("pointerdown", unlockAudio, { once: true });
+document.addEventListener("click", unlockAudio, { once: true });
 document.addEventListener("keydown", unlockAudio, { once: true });
