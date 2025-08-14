@@ -379,29 +379,27 @@ function scoring() {
   document.getElementById("score").textContent = correctCount;
 }
 
-function initProblems() {
-  fetch(`/emoji-fill-hole/data/${htmlLang}.csv`)
-    .then((response) => response.text())
-    .then((tsv) => {
-      let prevEn;
-      tsv.trimEnd().split("\n").forEach((line) => {
-        const [emoji, category, en, _] = line.split(",");
-        if (category in problems === false) {
-          problems[category] = [];
-        }
-        if (prevEn == en) {
-          const p = problems[category];
-          const last = p[p.length - 1];
-          last[0].push(emoji);
-        } else {
-          problems[category].push([[emoji], en]);
-        }
-        prevEn = en;
-      });
-    });
+async function initProblems() {
+  const response = await fetch(`/emoji-fill-hole/data/${htmlLang}.csv`);
+  const tsv = await response.text();
+  let prevEn;
+  tsv.trimEnd().split("\n").forEach((line) => {
+    const [emoji, category, en, _] = line.split(",");
+    if (category in problems === false) {
+      problems[category] = [];
+    }
+    if (prevEn == en) {
+      const p = problems[category];
+      const last = p[p.length - 1];
+      last[0].push(emoji);
+    } else {
+      problems[category].push([[emoji], en]);
+    }
+    prevEn = en;
+  });
 }
 
-initProblems();
+await initProblems();
 catsWalk();
 
 const pad = initSignaturePad(document.getElementById("tegaki"));
