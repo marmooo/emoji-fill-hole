@@ -23,11 +23,7 @@
       gtag('config', 'G-F2179JXDYY');
     </script>
     <script>
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function() {
-          navigator.serviceWorker.register('/emoji-fill-hole/ja/sw.js');
-        });
-      }
+      navigator.serviceWorker.register("/emoji-fill-hole/ja/sw.js");
     </script>
     <link rel="icon" type="image/png" href="/emoji-fill-hole/favicon/favicon.png">
     <link rel="icon" type="image/svg+xml" href="/emoji-fill-hole/favicon/favicon.svg">
@@ -80,7 +76,6 @@
               <option>必需品</option>
               <option>シンボル</option>
             </select>
-            <button title="ふりがな" id="addFurigana" class="fs-4 btn p-0 ms-1" type="button">👧</button>
             <button title="ダークモード切替" id="toggleDarkMode" class="fs-4 btn p-0 ms-1" type="button">🌓</button>
           </div>
         </div>
@@ -420,7 +415,7 @@ sudo apt install festival speech-dispatcher-festival</code></pre>
       <div class="text-muted">&copy; <a href="https://github.com/marmooo">marmooo</a>
       </div>
     </footer>
-    <script src="/emoji-fill-hole/index.js"></script>
+    <script type="module" src="/emoji-fill-hole/index.js"></script>
   </body>
 </html>
 
