@@ -1,4 +1,4 @@
-const cacheName = "2026-01-21 00:00";
+const cacheName = "2026-03-22 00:00";
 const urlsToCache = [
   "/emoji-fill-hole/index.js",
   "/emoji-fill-hole/data/en.csv",
